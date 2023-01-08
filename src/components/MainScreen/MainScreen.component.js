@@ -73,6 +73,8 @@ const MainScreen = (props) => {
     props.updateUser({ screen: true });
   };
   return (
+    <div className="App">
+
     <div className="wrapper">
       <div className="main-screen">
         <Participants />
@@ -83,9 +85,10 @@ const MainScreen = (props) => {
           onScreenClick={onScreenClick}
           onMicClick={onMicClick}
           onVideoClick={onVideoClick}
-        />
+          />
       </div>
     </div>
+          </div>
   );
 };
 

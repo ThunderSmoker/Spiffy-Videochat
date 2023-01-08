@@ -11,6 +11,7 @@ import {
 } from "./store/actioncreator";
 import { connect } from "react-redux";
 
+
 function App(props) {
   const getUserStream = async () => {
     const localStream = await navigator.mediaDevices.getUserMedia({
@@ -21,6 +22,7 @@ function App(props) {
     return localStream;
   };
   useEffect(async () => {
+    const logo = document.getElementById("logo").focus;
     const stream = await getUserStream();
     stream.getVideoTracks()[0].enabled = false;
     props.setMainStream(stream);
@@ -77,11 +79,7 @@ function App(props) {
     }
   }, [isStreamSet, isUserSet]);
 
-  return (
-    <div className="App">
-      <MainScreen />
-    </div>
-  );
+  return <MainScreen />;
 }
 
 const mapStateToProps = (state) => {

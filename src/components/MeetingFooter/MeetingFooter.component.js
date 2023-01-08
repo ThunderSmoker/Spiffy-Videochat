@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from "react";
+import './design logo.png'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faMicrophone,
   faVideo,
-  faDesktop,
+  faPhone,
   faVideoSlash,
+  faPhoneSlash,
   faMicrophoneSlash,
 } from "@fortawesome/free-solid-svg-icons";
 import ReactTooltip from "react-tooltip";
@@ -23,7 +25,6 @@ const MeetingFooter = (props) => {
       };
     });
   };
-
   const onVideoClick = () => {
     setStreamState((currentState) => {
       return {
@@ -34,7 +35,7 @@ const MeetingFooter = (props) => {
   };
 
   const onScreenClick = () => {
-    props.onScreenClick(setScreenState);
+    window.close()
   };
 
   const setScreenState = (isEnabled) => {
@@ -52,33 +53,37 @@ const MeetingFooter = (props) => {
     props.onVideoClick(streamState.video);
   }, [streamState.video]);
   return (
-    <div className="meeting-footer">
+    <div className="meeting-footer" style={{backgroundColor:"black"}}>
+      <div style={{display:"flex",marginLeft:0}}>
+
       <div
         className={"meeting-icons " + (!streamState.mic ? "active" : "")}
         data-tip={streamState.mic ? "Mute Audio" : "Unmute Audio"}
         onClick={micClick}
-      >
+        >
         <FontAwesomeIcon
           icon={!streamState.mic ? faMicrophoneSlash : faMicrophone}
           title="Mute"
-        />
+          />
       </div>
       <div
         className={"meeting-icons " + (!streamState.video ? "active" : "")}
         data-tip={streamState.video ? "Hide Video" : "Show Video"}
         onClick={onVideoClick}
-      >
+        >
         <FontAwesomeIcon icon={!streamState.video ? faVideoSlash : faVideo} />
       </div>
       <div
         className="meeting-icons"
-        data-tip="Share Screen"
+        data-tip="Cut Call"
         onClick={onScreenClick}
-        disabled={streamState.screen}
-      >
-        <FontAwesomeIcon icon={faDesktop} />
+       
+        >
+        <FontAwesomeIcon color="red" icon={faPhoneSlash}  />
       </div>
+        </div>
       <ReactTooltip />
+
     </div>
   );
 };

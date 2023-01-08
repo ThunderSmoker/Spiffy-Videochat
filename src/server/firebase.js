@@ -1,25 +1,29 @@
-import firebase from "firebase";
+import firebase from "firebase/app";
+import database from "firebase/database";
 
-var firebaseConfig = {
-  apiKey: "", // Add API Key
-  databaseURL:"" // Add databaseURL
+//To initialize the firebase app we need to pass the configuration object.
+
+var firebaseConfig ={
+    apiKey: 'AIzaSyBXD3XqKNKsqF6sOe6pLytTBfbcXBJaDXM' ,  //apiKey 
+    databaseURL:'https://meet-clone-38176-default-rtdb.asia-southeast1.firebasedatabase.app' //<= url of database needed/....
 };
-// Initialize Firebase
+
 firebase.initializeApp(firebaseConfig);
-
 export const db = firebase;
+var firepadRef =firebase.database().ref(); //thid will give the address to our entire database
 
-var firepadRef = firebase.database().ref();
+export const userName = prompt("Write your Spiffy Name to display");//this will prompt the message on screen asking the name
+// export const userName="Aradhya"
+const urlParams = new URLSearchParams(window.location.search); // this checks if the room id is already present or not by using the existing javascript class to search urls
 
-export const userName = prompt("What's your name?");
-const urlparams = new URLSearchParams(window.location.search);
-const roomId = urlparams.get("id");
+const roomId = urlParams.get("id"); // to get the value of the room id
 
-if (roomId) {
-  firepadRef = firepadRef.child(roomId);
-} else {
-  firepadRef = firepadRef.push();
-  window.history.replaceState(null, "Meet", "?id=" + firepadRef.key);
+if (roomId){
+    firepadRef= firepadRef.child(roomId);//child will help us to give reference of the particular collection in database
+}
+else{
+    firepadRef= firepadRef.push();//new room create
+    window.history.replaceState(null,"Meet","?id="+ firepadRef.key); // this will be use to append quer param without refreshing
 }
 
 export default firepadRef;
