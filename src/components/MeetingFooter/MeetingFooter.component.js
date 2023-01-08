@@ -6,6 +6,7 @@ import {
   faVideo,
   faPhone,
   faVideoSlash,
+  faShareSquare,
   faPhoneSlash,
   faMicrophoneSlash,
 } from "@fortawesome/free-solid-svg-icons";
@@ -32,6 +33,11 @@ const MeetingFooter = (props) => {
         video: !currentState.video,
       };
     });
+  };
+  const onCopyClick = () => {
+    var copyText=window.location.href
+    navigator.clipboard.writeText(copyText);
+    alert('Copied Meet Link!')
   };
 
   const onScreenClick = () => {
@@ -80,6 +86,14 @@ const MeetingFooter = (props) => {
        
         >
         <FontAwesomeIcon color="red" icon={faPhoneSlash}  />
+      </div>
+      <div
+        className="meeting-icons"
+        data-tip="Share Link"
+        onClick={onCopyClick}
+       
+        >
+        <FontAwesomeIcon color="#00FFFF" icon={faShareSquare}  />
       </div>
         </div>
       <ReactTooltip />
