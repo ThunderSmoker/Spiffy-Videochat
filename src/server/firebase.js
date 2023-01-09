@@ -12,8 +12,8 @@ firebase.initializeApp(firebaseConfig);
 export const db = firebase;
 var firepadRef =firebase.database().ref(); //thid will give the address to our entire database
 
-// export const userName = prompt("Write your Spiffy Name to display");//this will prompt the message on screen asking the name
-export const userName="Aradhya"
+export const userName = prompt("Write your Spiffy Name to display");//this will prompt the message on screen asking the name
+// export const userName="Aradhya"
 const urlParams = new URLSearchParams(window.location.search); // this checks if the room id is already present or not by using the existing javascript class to search urls
 
 const roomId = urlParams.get("id"); // to get the value of the room id
